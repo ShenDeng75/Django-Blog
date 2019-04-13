@@ -1,0 +1,4 @@
+{{ object.name }}
+{{ object.url }}
+{{ object.describe }}
+{{ object.belong }}

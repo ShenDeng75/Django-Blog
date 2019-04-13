@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}无法删除主邮箱地址 ({{email}}).{% endblocktrans %}

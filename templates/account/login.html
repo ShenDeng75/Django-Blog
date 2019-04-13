@@ -1,0 +1,45 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block subpage %}
+
+<h1>{% trans "Sign In" %}</h1>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}如果已有账户请登录，或者, <a href="{{ signup_url }}">注册</a>
+一个 {{ site_name }} 账号{% endblocktrans %}</p>
+
+{#<div class="socialaccount_ballot">#}
+{##}
+{#  <ul class="socialaccount_providers">#}
+{#    {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
+{#  </ul>#}
+{##}
+{#  <div class="login-or">{% trans 'or' %}</div>#}
+{##}
+{#</div>#}
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}如果你还没有创建账户，请
+<a href="{{ signup_url }}">注册账户</a> first.{% endblocktrans %}</p>
+{% endif %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {% include 'account/snippets/bs4_form.html' with form=form %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="btn btn-success" type="submit">{% trans "Sign In" %}</button>
+</form>
+
+{% endblock %}

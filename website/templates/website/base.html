@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}
+    网址分享
+{% endblock %}
+
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="{%  static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/kuai.css' %}" media="all">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/build.css' %}" media="all">
+    <!-- js -->
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <!-- //js -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+
+    <style>
+       span.highlighted { color: red; }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    {% block style %}  <!-- 设置不同风格 -->
+        <div style="background-color: #111111; position: absolute; width: 100%" class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+    {% endblock %}
+    {% include 'top.html' %}
+
+    <div class="container">
+        {% block subpage %}
+        {% endblock %}
+    </div>
+
+    {% include 'bottom.html' %}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock %}

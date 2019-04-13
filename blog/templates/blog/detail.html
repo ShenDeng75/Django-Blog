@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block bootstrap %}
+{% endblock %}
+{% block subpage %}
+    <div class="container">
+    <div style="margin-top: 100px">
+        <h3><strong>{{ blog.title }}</strong></h3>
+        <br />
+        {% include blog_path %}
+    </div>
+    </div>
+{% endblock%}

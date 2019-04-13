@@ -1,0 +1,14 @@
+    <ul class="nav navbar-nav" id="cl-effect-18">   {# class加上 cl-effect-18可以有X的效果 #}
+        <li class="act"><a href="{% url 'home:首页' %}" class="effect1 active">首页</a></li>
+        <li><a href="{% url 'blog:首页' %}">我的博客</a></li>
+        <li><a href="{% url 'website:首页' cate="all" %}">网址分享</a></li>
+        <li><a href="#">实用脚本</a></li>
+        <li><a href="#">我的简历</a></li>
+        <li>{% if user.pk %}
+            <a href="{% url 'author:显示个人信息' %}">{{ user }}</a>
+        {% else %}
+            <a href="{% url 'account_login' %}">登录</a>
+        {% endif %}
+        </li>
+    </ul>
+</div>

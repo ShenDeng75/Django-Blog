@@ -1,0 +1,8 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}欢迎来到 {{ site_name }}!
+
+您收到这封电子邮件是因为用户 {{ user_display }} 已将您的电子邮箱作为地址，以连接他的账户。
+
+这是确认地址 {{ activate_url }}
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}谢谢你来到 {{ site_name }}!
+{{ site_domain }}{% endblocktrans %}

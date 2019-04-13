@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}
+    博客
+{% endblock %}
+
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="{%  static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/build.css' %}" media="all">
+    <!-- js -->
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <!-- //js -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+    {% block style %}  <!-- 设置不同风格 -->
+        <div style="background-color: #111111; position: fixed; width: 100%" class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+    {% endblock %}
+    {% include 'top.html' %}   <!-- 页首 -->
+    {% block subpage %}   <!-- 子页内容 -->
+
+         <div class="banner-bottom">
+		<div class="container">
+            {% if is_superuser %}
+               <a class="btn btn-success" href="{% url 'blog:添加博客' %}">添加</a>
+            {% endif %}
+        <a class="btn btn-success" href="{% url 'blog:博客分类' tag="all" %}">全部 ({{ allcount }})</a>
+        {% for t in tags.items %}
+                <a class="btn btn-success" href="{% url 'blog:博客分类' tag=t.0 %}">{{ t.0 }} ({{ t.1 }})</a>
+        {% endfor %}
+			<div class="banner-bottom-grids">
+            <br>
+
+             {% for blog in  blogs %}
+{#                 <a href="{% url 'blog:查看博客' pk=blog.pk slug=blog.slug %}">#}
+{#                 <div class="col-md-3 banner-bottom-grid-left" style="margin-bottom: 30px;">#}
+{#					<div class="br-bm-gd-lt">#}
+{#						<div class="overlay">#}
+{#							<div class="arrow-left"></div>#}
+{#							<div class="rectangle"></div>#}
+{#						</div>#}
+{#						<div class="health-pos">#}
+{#							<div class="health">#}
+{#								<ul>#}
+{#									<li>{{ blog.create_date }}</li>#}
+{#                                    <li>{{ blog.belong }}</li>#}
+{#								</ul>#}
+{#							</div>#}
+{#							<h3>{{ blog.title }}</h3>#}
+{#						</div>#}
+{#                        <div class="com-heart" style="position: fixed; margin-top: 0">#}
+{#								<ul>#}
+{#									<li><a href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>{{ blog.visits }} Looks</a></li>#}
+{#								</ul>#}
+{#                        </div>#}
+{#					</div>#}
+{#				</div>#}
+{#                 </a>#}
+{#                 {% empty %}#}
+{#                {% for i in range10 %}#}
+{#                    <br />#}
+{#                {% endfor %}#}
+                 <div class="mod-b" data-aid="213665">
+                 <div class="mod-thumb">
+                       <a class="transition" title="{{ blog.title }}" href="{% url 'blog:查看博客' pk=blog.pk slug=blog.slug %}" target="_blank">
+						  <img class="lazy" src="{% static 'images/blog_thum.jpg' %}" alt="你的公司够前沿吗？至少在AI这件事上，多数企业都眼高手低">
+                       </a>
+                 </div>
+
+                 <div class="mob-ctt">
+                    <h2><a href="{% url 'blog:查看博客' pk=blog.pk slug=blog.slug %}" class="transition msubstr-row2" target="_blank">{{ blog.title }}</a></h2>
+					<div class="mob-author">
+                         <div class="author-face">
+                              <a href="#" target="_blank"><img src="{% static 'images/fre.jpg' %}"></a>
+                         </div>
+                            <span class="author-name ">{{ blog.create_date }}</span>
+                         <i class="icon icon-cmt"></i><em>0</em>
+                         <i class="icon icon-fvr"></i><em>0</em>
+                    </div>
+                    <div class="mob-sub"></div>
+                 </div>
+            </div>
+             {% endfor %}
+
+				<div class="clearfix"> </div>
+			</div>
+            <br />
+		</div>
+	</div>
+
+    {% endblock%}
+    {% include 'bottom.html' %}   <!-- 页尾 -->
+    <!-- for bootstrap working -->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load myhightlight %}
+
+{% block subpage %}
+    <br><br><br><br>
+{# 按钮 #}
+    <a class="btn btn-success" href="{% url 'website:添加网址' %}">我要分享</a>
+    <a class="btn btn-success" href="{% url 'website:首页' cate="all" %}">全部 ({{ allcount }})</a>
+    {% for cate in category.items %}
+        <a class="btn btn-success" href="{% url 'website:首页' cate=cate.0 %}">{{ cate.0 }} ({{ cate.1 }})</a>
+    {% endfor %}
+{# end按钮 #}
+{#  搜索表单  #}
+    <form method="get" action="{% url 'website:搜索' %}">
+           <br>
+           <label for="id_q"></label>
+           <input type="search" id="id_q" name="q" class="form-control" style="width: 20%; display: inline" value="{{ query }}">
+           <input class="btn btn-success" type="submit" value="搜索">
+    </form>
+{#  end搜索表单  #}
+        {% if query %}  <!--如果有搜索内容-->
+            {% for web in page.object_list %}   <!--如果搜索到-->
+
+                <div class="mod-b" data-aid="213665">
+                 <div class="mod-thumb">
+                       <a class="transition" title="{{ web.object.name }}" href="{{ web.object.url }}" target="_blank">
+						  <img class="lazy" src="{% static 'images/website_thum.jpg' %}" alt="{% myhighlight web.object.name with query %}">
+                       </a>
+                 </div>
+
+                 <div class="mob-ctt">
+                    <h2><a href="{{ web.object.url }}" class="transition msubstr-row2" target="_blank">{% myhighlight web.object.name with query %}</a></h2>
+					<div class="mob-author">
+                         <div class="author-face">
+                              <a href="{{ web.object.url }}" target="_blank"><img src="{% static 'images/fre.jpg' %}"></a>
+                         </div>
+                            <span class="author-name ">{{ web.object.create_date }}</span>
+                         <i class="icon icon-cmt"></i><em>{% myhighlight web.author with query %}</em>
+                         <i class="icon icon-fvr"></i><em>1</em>
+                    </div>
+                    <div class="mob-sub">{% myhighlight web.object.describe with query %}</div>
+
+                 </div>
+            </div>
+
+            {% empty %}
+                {% for b in range10 %}
+                    <br>
+                {% endfor %}
+                <p><strong>没有您要搜索的内容！</strong></p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}   <!--如果有下一页-->
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}上一页{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}下一页{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+
+        {% else %}    <!-- 如果搜索框为空，则显示所有内容 -->
+            {% for web in website %}
+            <div class="mod-b" data-aid="213665">
+                         <div class="mod-thumb">
+                               <a class="transition" title="{{ web.name }}" href="{{ web.url }}" target="_blank">
+	        					  <img class="lazy" src="{% static 'images/website_thum.jpg' %}" alt="{{ web.name}}">
+                               </a>
+                         </div>
+
+                         <div class="mob-ctt">
+                            <h2><a href="{{ web.url }}" class="transition msubstr-row2" target="_blank">{{ web.name }}</a></h2>
+	        				<div class="mob-author">
+                                 <div class="author-face">
+                                      <a href="{{ web.url }}" target="_blank"><img src="{% static 'images/fre.jpg' %}"></a>
+                                 </div>
+                                    <span class="author-name ">{{ web.create_date }}</span>
+                                 <i class="icon icon-cmt"></i><em>{{ web.belong }}</em>
+                                 <i class="icon icon-fvr"></i><em>1</em>
+                            </div>
+                            <div class="mob-sub">{{ web.describe }}</div>
+                         </div>
+                    </div>
+            {% endfor %}
+        {% endif %}
+
+{##}
+{#    {% for web in website %}#}
+{#    <div class="mod-b" data-aid="213665">#}
+{#                 <div class="mod-thumb">#}
+{#                       <a class="transition" title="{{ web.name }}" href="{{ web.url }}" target="_blank">#}
+{#						  <img class="lazy" src="{% static 'images/website_thum.jpg' %}" alt="{{ web.name}}">#}
+{#                       </a>#}
+{#                 </div>#}
+{##}
+{#                 <div class="mob-ctt">#}
+{#                    <h2><a href="{{ web.url }}" class="transition msubstr-row2" target="_blank">{{ web.name }}</a></h2>#}
+{#					<div class="mob-author">#}
+{#                         <div class="author-face">#}
+{#                              <a href="{{ web.url }}" target="_blank"><img src="{% static 'images/fre.jpg' %}"></a>#}
+{#                         </div>#}
+{#                            <span class="author-name ">{{ web.create_date }}</span>#}
+{#                         <i class="icon icon-cmt"></i><em>12</em>#}
+{#                         <i class="icon icon-fvr"></i><em>1</em>#}
+{#                    </div>#}
+{#                    <div class="mob-sub">{{ web.describe }}</div>#}
+{#                 </div>#}
+{#            </div>#}
+{#    {% endfor %}#}
+{% endblock %}
