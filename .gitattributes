@@ -1,4 +1,4 @@
-*.css linguist-language=Django
-*.py linguist-language=Django
-*.html linguist-language=Django
-*.js linguist-language=Django
+*.css linguist=Django
+*.py linguist=Django
+*.html linguist=Django
+*.js linguist=Django
