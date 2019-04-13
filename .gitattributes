@@ -1,3 +1,4 @@
 *.css linguist-language=python
 *.py linguist-language=python
-*.HTML linguist-language=Django
+*.html linguist-language=python
+*.js linguist-language=python
