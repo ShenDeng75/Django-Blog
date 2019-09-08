@@ -24,15 +24,15 @@ def profile_detail(request):
     '''
     显示个人信息页
     '''
-    user = request.user
+    _user = request.user
     try:
-        author = Author.objects.get(user=user)
+        author = Author.objects.get(user=_user)
     except Exception:
         request.session.flush()
         return HttpResponseRedirect(reverse('home:首页'))   # 如果session失效
     if author.nick.strip() == "":
         return HttpResponseRedirect(reverse('author:修改信息'))
-    return render(request, 'author/profile_detail.html', {'user': user})
+    return render(request, 'author/profile_detail.html', {'user': _user})
 
 
 @login_required

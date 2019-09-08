@@ -74,7 +74,7 @@ LOGIN_URL = "/account/login/"
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465    # 最好用465，因为在部署时有些服务器会禁用25端口。
 EMAIL_HOST_USER = '3255803596@qq.com'  # 你的 QQ 账号和授权码。
-EMAIL_HOST_PASSWORD = 'shenmlykcfxqbmcddbgbdeng'
+EMAIL_HOST_PASSWORD = 'mlykcfxqbmcddbgb'
 EMAIL_USE_SSL = True  # 这里必须是 SSL，否则部署后发送不成功。
 DEFAULT_FROM_EMAIL = '平凡的神灯<3255803596@qq.com>'
 
@@ -164,7 +164,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shendeng',
         'USER': 'root',
-        'PASSWORD': '123456',   # @ShenDeng75
+        'PASSWORD': 'shendeng75',   # @ShenDeng75
         'HOST': 'localhost',
         'PORT': 3306,
     }

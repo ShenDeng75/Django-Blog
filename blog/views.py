@@ -29,9 +29,9 @@ def tags_sort(tags):
     '''
     tags_dict = {}
     tags_list = [t.name for t in tags]
-    a = tags_list[1]
-    tags_list.append(a)
-    tags_list.pop(1)
+    # a = tags_list[1]
+    # tags_list.append(a)
+    # tags_list.pop(1)
     for t in tags_list:   # 获取数量
         tag = Tag.objects.get(name=t)
         tags_dict[t] = tag.blog_set.all().count()
